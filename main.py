@@ -1,10 +1,8 @@
 from fastapi import FastAPI, Body
 from pydantic import BaseModel, EmailStr, StringConstraints, validator
 from typing_extensions import Annotated
-# from fastapi.testclient import TestClient
-# from passlib.context import CryptContext
 from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm  # noqa: F401
 
 
 

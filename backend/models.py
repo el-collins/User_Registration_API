@@ -9,7 +9,7 @@ class UserRegistration(BaseModel):
             min_length=3,
             max_length=50,
             pattern=r"^[a-zA-Z0-9_-]+$",
-            
+
         ),
     ]
     email: EmailStr = Field(..., min_length=6, description="User email")
@@ -31,5 +31,5 @@ class UserRegistration(BaseModel):
         return value
 
 class UserLogin(BaseModel):
-    username: str
+    email: EmailStr
     password: str

@@ -1,7 +1,8 @@
 from pydantic import BaseModel, EmailStr, Field, StringConstraints, validator
 from typing_extensions import Annotated
 
-class UserRegistration(BaseModel):
+
+class User(BaseModel):
     username: Annotated[
         str,
         StringConstraints(
@@ -9,7 +10,6 @@ class UserRegistration(BaseModel):
             min_length=3,
             max_length=50,
             pattern=r"^[a-zA-Z0-9_-]+$",
-
         ),
     ]
     email: EmailStr = Field(..., min_length=6, description="User email")
@@ -27,9 +27,23 @@ class UserRegistration(BaseModel):
             raise ValueError(
                 "Password must be at least 8 characters long, include a number, an uppercase letter, and a lowercase letter"
             )
-         # Hash the password using passlib
+        # Hash the password using passlib
         return value
+
 
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+
+class TokenData(BaseModel):
+    email: EmailStr
+
+
+class UserInDB(User):
+    hashed_password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
